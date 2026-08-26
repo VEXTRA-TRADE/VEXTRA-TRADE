@@ -42,9 +42,9 @@
         .asset-selector { background: var(--bg-card); margin: 10px 16px 5px 16px; padding: 10px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 13px; border: 1px solid var(--border-color); cursor: pointer; user-select: none; }
         .chart-controls { display: flex; justify-content: space-between; align-items: center; padding: 4px 16px; color: var(--text-muted); font-size: 12px; }
         
-        /* FIX: Chart Area Structure */
+        /* Chart Area Structure */
         .chart-area { position: relative; width: 100%; height: 260px; margin-top: 5px; }
-        .price-badge-fixed { position: absolute; right: 15px; top: 15px; background: rgba(21, 26, 35, 0.9); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 10px; display: flex; flex-direction: column; align-items: flex-end; z-index: 4; }
+        .price-badge-fixed { position: absolute; right: 15px; top: 15px; background: rgba(21, 26, 35, 0.9); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 10px; display: flex; flex-direction: column; align-items: flex-end; z-index: 4; backdrop-filter: blur(4px); }
         .price-badge-fixed .current-price { font-size: 16px; font-weight: 800; font-family: monospace; }
         .price-badge-fixed .price-change { font-size: 10px; font-weight: 600; }
 
@@ -60,31 +60,32 @@
         .input-component .val-input { font-size: 13px; font-weight: 700; color: #fff; width: 100%; background: transparent; border: none; text-align: center; outline: none; }
 
         .action-buttons { display: flex; gap: 10px; align-items: center; }
-        .btn-action { flex: 1; padding: 12px; border-radius: 8px; border: none; font-size: 15px; font-weight: bold; color: #fff; display: flex; justify-content: center; align-items: center; gap: 8px; cursor: pointer; }
+        .btn-action { flex: 1; padding: 12px; border-radius: 8px; border: none; font-size: 15px; font-weight: bold; color: #fff; display: flex; justify-content: center; align-items: center; gap: 8px; cursor: pointer; transition: opacity 0.2s; }
+        .btn-action:active { opacity: 0.8; }
         .btn-put { background: var(--red); }
         .btn-call { background: var(--green); color: #000; }
 
         /* FILTER TRANSAKSI & ASET */
         .trx-filter-scroll { display: flex; gap: 8px; padding: 10px 16px; overflow-x: auto; background: var(--bg-main); border-bottom: 1px solid var(--border-color); }
         .trx-filter-scroll::-webkit-scrollbar { display: none; }
-        .trx-chip { padding: 6px 16px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; font-size: 11px; white-space: nowrap; cursor: pointer; color: var(--text-muted); }
+        .trx-chip { padding: 6px 16px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; font-size: 11px; white-space: nowrap; cursor: pointer; color: var(--text-muted); transition: 0.2s; }
         .trx-chip.active { background: var(--green); color: #000; font-weight: bold; border-color: var(--green); }
         .search-box { padding: 10px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border-color); }
         .search-box input { width: 100%; background: var(--bg-input); border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 6px; color: #fff; outline: none; font-size: 12px; }
         .asset-list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--border-color); cursor: pointer; }
-        .asset-list-item:hover { background: var(--bg-card); }
+        .asset-list-item:hover { background: var(--bg-input); }
 
         /* BOTTOM NAV & SHEETS */
-        .bottom-nav { position: absolute; bottom: 0; width: 100%; background: var(--bg-card); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid var(--border-color); z-index: 10; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-size: 10px; gap: 3px; text-decoration: none; cursor: pointer; }
+        .bottom-nav { position: absolute; bottom: 0; width: 100%; background: var(--bg-card); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid var(--border-color); z-index: 10; padding-bottom: env(safe-area-inset-bottom, 10px); }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-size: 10px; gap: 3px; text-decoration: none; cursor: pointer; transition: color 0.2s; }
         .nav-item.active { color: var(--green); }
         .nav-item i { font-size: 18px; }
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 20; opacity: 0; visibility: hidden; transition: 0.3s; }
         .overlay.active { opacity: 1; visibility: visible; }
-        .bottom-sheet { position: absolute; bottom: -100%; left: 0; width: 100%; background: var(--bg-card); z-index: 30; border-top-left-radius: 16px; border-top-right-radius: 16px; padding: 16px; transition: 0.3s ease-in-out; display: flex; flex-direction: column; max-height: 90vh; overflow-y: auto; }
+        .bottom-sheet { position: absolute; bottom: -100%; left: 0; width: 100%; background: var(--bg-card); z-index: 30; border-top-left-radius: 16px; border-top-right-radius: 16px; padding: 16px; padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); transition: 0.3s ease-in-out; display: flex; flex-direction: column; max-height: 90vh; overflow-y: auto; }
         .bottom-sheet.active { bottom: 0; }
         .sheet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-weight: bold; font-size: 16px; }
-        .sheet-close { background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; }
+        .sheet-close { background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; padding: 5px; }
         
         .profile-data-card { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-bottom: 10px; }
         .profile-data-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; }
@@ -95,13 +96,51 @@
         select.time-unit { background: transparent; color: var(--green); border: none; outline: none; font-size: 11px; font-weight: bold; cursor: pointer; appearance: none; text-align: center; }
         select.time-unit option { background: var(--bg-input); color: #fff; }
 
-        /* TOAST & MODAL STYLES (NEW) */
-        #toastContainer { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; width: 90%; max-width: 400px; }
-        .toast { background: var(--bg-input); color: #fff; padding: 12px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.5); border-left: 4px solid var(--green); animation: fadeInDown 0.3s forwards; display: flex; align-items: center; gap: 10px; }
-        .toast.error { border-left-color: var(--red); }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        /* PERBAIKAN TOAST (NOTIFIKASI) */
+        #toastContainer { 
+            position: fixed; 
+            top: 25px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            z-index: 99999; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 8px; 
+            pointer-events: none; 
+            align-items: center; 
+            width: 90%;
+            max-width: 400px;
+        }
+        .toast { 
+            background: rgba(30, 37, 48, 0.95); 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #fff; 
+            padding: 10px 18px; 
+            border-radius: 30px; 
+            font-size: 12px; 
+            font-weight: 500; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+            border: 1px solid var(--border-color); 
+            animation: toastSlideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            gap: 8px; 
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+        .toast i.fa-circle-check { color: var(--green); font-size: 14px; }
+        .toast i.fa-circle-exclamation { color: var(--red); font-size: 14px; }
         
-        .custom-modal-sheet { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); width: 90%; max-width: 400px; background: var(--bg-card); z-index: 10000; border-radius: 16px; padding: 20px; display: none; flex-direction: column; opacity: 0; transition: 0.2s ease-in-out; border: 1px solid var(--border-color); }
+        @keyframes toastSlideDown { 
+            from { opacity: 0; transform: translateY(-20px) scale(0.95); } 
+            to { opacity: 1; transform: translateY(0) scale(1); } 
+        }
+
+        /* CUSTOM MODAL */
+        .custom-modal-sheet { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); width: 85%; max-width: 360px; background: var(--bg-card); z-index: 10000; border-radius: 16px; padding: 20px; display: none; flex-direction: column; opacity: 0; transition: 0.2s ease-in-out; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .custom-modal-sheet.active { display: flex; opacity: 1; transform: translate(-50%, -50%) scale(1); }
     </style>
 </head>
@@ -118,8 +157,8 @@
             <div id="customModalMessage" style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.4;"></div>
             <input type="text" id="customModalInput" style="display: none; width: 100%; background: var(--bg-input); border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; color: #fff; font-size: 14px; outline: none; margin-bottom: 16px;" autocomplete="off">
             <div style="display: flex; gap: 10px;">
-                <button id="customModalCancel" style="flex: 1; padding: 12px; border-radius: 8px; background: rgba(255,59,48,0.1); border: 1px solid var(--red); color: var(--red); font-weight: bold; cursor: pointer; border: none;">Batal</button>
-                <button id="customModalConfirm" style="flex: 1; padding: 12px; border-radius: 8px; background: var(--green); color: #000; border: none; font-weight: bold; cursor: pointer;">OK</button>
+                <button id="customModalCancel" style="flex: 1; padding: 12px; border-radius: 8px; background: rgba(255,59,48,0.1); border: 1px solid var(--red); color: var(--red); font-weight: bold; cursor: pointer; transition: 0.2s;">Batal</button>
+                <button id="customModalConfirm" style="flex: 1; padding: 12px; border-radius: 8px; background: var(--green); color: #000; border: none; font-weight: bold; cursor: pointer; transition: 0.2s;">OK</button>
             </div>
         </div>
 
@@ -157,7 +196,6 @@
                 <span style="background: var(--bg-input); padding: 2px 6px; border-radius: 4px;">1m <i class="fa-solid fa-chevron-down"></i></span>
             </div>
 
-            <!-- FIX: Chart Wrapper Structure -->
             <div class="chart-area" id="chartWrapper">
                 <div class="price-badge-fixed" id="priceBadge">
                     <span class="current-price" id="textPrice">Memuat...</span>
@@ -267,7 +305,7 @@
         <div id="screenAset" class="screen" style="z-index: 100; background: var(--bg-main); position: absolute; top:0; left:0; width:100%; height:100%;">
             <div class="screen-header">
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <i class="fa-solid fa-chevron-left" style="cursor:pointer;" onclick="closeAssetScreen()"></i>
+                    <i class="fa-solid fa-chevron-left" style="cursor:pointer; padding-right:10px;" onclick="closeAssetScreen()"></i>
                     <span>Pilih Aset Perdagangan</span>
                 </div>
             </div>
@@ -349,10 +387,10 @@
             <button style="width:100%; margin-top:12px; padding:10px; border-radius:8px; background:rgba(255,59,48,0.1); border:1px solid var(--red); color:var(--red); font-weight:bold; cursor:pointer;" onclick="logoutUser()">Keluar (Logout)</button>
         </div>
 
-        <!-- OTHER SHEETS (Kept 100% Intact) -->
+        <!-- OTHER SHEETS -->
         <div class="bottom-sheet" id="sheetEditKontak" style="z-index: 50;">
             <div class="sheet-header">
-                <i class="fa-solid fa-chevron-left" style="cursor:pointer;" onclick="openSheet('sheetAkun')"></i>
+                <i class="fa-solid fa-chevron-left" style="cursor:pointer; padding-right:10px;" onclick="openSheet('sheetAkun')"></i>
                 <span>Ubah Email & Telepon</span>
                 <button class="sheet-close" onclick="closeAllSheets()"><i class="fa-solid fa-xmark"></i></button>
             </div>
@@ -368,7 +406,7 @@
 
         <div class="bottom-sheet" id="sheetInfoPenarikan" style="z-index: 50;">
             <div class="sheet-header">
-                <i class="fa-solid fa-chevron-left" style="cursor:pointer;" onclick="openSheet('sheetAkun')"></i>
+                <i class="fa-solid fa-chevron-left" style="cursor:pointer; padding-right:10px;" onclick="openSheet('sheetAkun')"></i>
                 <span>Informasi Penarikan</span>
                 <button class="sheet-close" onclick="closeAllSheets()"><i class="fa-solid fa-xmark"></i></button>
             </div>
@@ -394,13 +432,13 @@
             </select>
 
             <div style="margin-bottom:8px; font-size:12px; color:var(--text-muted);">Nomor Rekening / E-Wallet</div>
-            <input type="number" id="inputWdNomor" placeholder="Contoh: 081234567890 atau 123456789" style="width:100%; background:var(--bg-input); border:1px solid var(--border-color); padding:14px; border-radius:8px; color:#fff; font-size:14px; font-weight:bold; outline:none; margin-bottom:16px;">
+            <input type="number" id="inputWdNomor" placeholder="Contoh: 081234567890" style="width:100%; background:var(--bg-input); border:1px solid var(--border-color); padding:14px; border-radius:8px; color:#fff; font-size:14px; font-weight:bold; outline:none; margin-bottom:16px;">
             <button style="width:100%; background:var(--green); color:#000; padding:14px; border-radius:8px; font-weight:bold; font-size:14px; border:none; cursor:pointer;" onclick="simpanInfoPenarikan()">Simpan Data</button>
         </div>
 
         <div class="bottom-sheet" id="sheetUbahPassword" style="z-index: 50;">
             <div class="sheet-header">
-                <i class="fa-solid fa-chevron-left" style="cursor:pointer;" onclick="openSheet('sheetAkun')"></i>
+                <i class="fa-solid fa-chevron-left" style="cursor:pointer; padding-right:10px;" onclick="openSheet('sheetAkun')"></i>
                 <span>Ubah Password</span>
                 <button class="sheet-close" onclick="closeAllSheets()"><i class="fa-solid fa-xmark"></i></button>
             </div>
@@ -433,7 +471,7 @@
                 <div style="font-size:24px; font-weight:bold; color:var(--green); margin-bottom:16px;">IDR <span id="nominalTampilTransfer">0</span></div>
                 
                 <div id="instruksiDinamis" style="background:var(--bg-input); border:1px dashed var(--green); padding:16px; border-radius:8px; margin-bottom:20px;">
-                    <!-- Diisi lewat JS (Gambar, No Rek, Atas Nama) -->
+                    <!-- Diisi lewat JS -->
                 </div>
                 
                 <div style="display:flex; gap:10px;">
@@ -444,7 +482,7 @@
         </div>
 
         <div class="bottom-sheet" id="sheetPilihMetode" style="z-index: 40;">
-            <div class="sheet-header"><i class="fa-solid fa-chevron-left" style="cursor:pointer;" onclick="openSheet('sheetDeposit')"></i><span>Metode Pembayaran</span><button class="sheet-close" onclick="closeAllSheets()"><i class="fa-solid fa-xmark"></i></button></div>
+            <div class="sheet-header"><i class="fa-solid fa-chevron-left" style="cursor:pointer; padding-right:10px;" onclick="openSheet('sheetDeposit')"></i><span>Metode Pembayaran</span><button class="sheet-close" onclick="closeAllSheets()"><i class="fa-solid fa-xmark"></i></button></div>
             <div id="methodListContainer">
                 <div style="padding:14px 12px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; cursor:pointer;" onclick="pilihMetodeLengkap('QRIS', 'QRIS (Otomatis & Instan)')"><span style="font-size:14px; font-weight:bold;">QRIS (Otomatis & Instan)</span></div>
                 <div style="padding:14px 12px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; cursor:pointer;" onclick="pilihMetodeLengkap('SEABANK', 'SeaBank')"><span style="font-size:14px; font-weight:bold;">SeaBank</span></div>
@@ -453,7 +491,7 @@
             </div>
         </div>
         
-    </div> <!-- End App Container -->
+    </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
@@ -488,14 +526,26 @@
         let selectedDurationSeconds = 60; 
         let listAsetAktif = JSON.parse(localStorage.getItem('vextra_active_trades')) || []; 
 
-        // ================= UI UPGRADES (TOAST & MODAL) =================
+        // ================= PERBAIKAN LOGIKA UI (TOAST) =================
         window.customAlert = (msg, isError = false) => {
             const container = document.getElementById('toastContainer');
+            
+            // FIX: Hapus isi container sebelum memunculkan toast baru agar tidak menumpuk
+            container.innerHTML = '';
+            
             const toast = document.createElement('div');
-            toast.className = `toast ${isError ? 'error' : ''}`;
+            toast.className = `toast`;
             toast.innerHTML = `<i class="fa-solid ${isError ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i> <span>${msg}</span>`;
+            
             container.appendChild(toast);
-            setTimeout(() => toast.remove(), 4000);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-20px) scale(0.95)';
+                setTimeout(() => {
+                    if(toast.parentNode === container) toast.remove();
+                }, 300);
+            }, 3000); 
         };
 
         window.showCustomModal = (type, title, message, placeholder = "") => {
@@ -695,7 +745,7 @@
             const val = parseInt(document.getElementById('tradeDurationVal').value) || 1;
             const unit = parseInt(document.getElementById('tradeDurationUnit').value) || 1;
             if(val < 1) document.getElementById('tradeDurationVal').value = 1;
-            selectedDurationSeconds = (parseInt(document.getElementById('tradeDurationVal').value)) * unit;
+            selectedDurationSeconds = Math.max(1, (parseInt(document.getElementById('tradeDurationVal').value) || 1)) * unit;
         };
         window.adjustTimeCustom = (d) => { 
             let el = document.getElementById('tradeDurationVal');
@@ -707,7 +757,20 @@
         window.switchNav = (screenName, navElement) => { 
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); 
             document.getElementById('screen' + screenName).classList.add('active'); 
-            if(navElement){ document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); navElement.classList.add('active'); } 
+            if(navElement){ 
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); 
+                navElement.classList.add('active'); 
+            } 
+            
+            // FIX: Pemicu resize pada chart agar tidak bug ketika kembali ke layar Terminal
+            if(screenName === 'Terminal' && chart) {
+                setTimeout(() => {
+                    const wrapper = document.getElementById('chartWrapper');
+                    if (wrapper.clientWidth > 0 && wrapper.clientHeight > 0) {
+                        chart.applyOptions({ width: wrapper.clientWidth, height: wrapper.clientHeight });
+                    }
+                }, 50);
+            }
         };
         
         window.openSheet = (s) => { closeAllSheets(); document.getElementById('mainOverlay').classList.add('active'); document.getElementById(s).classList.add('active'); };
@@ -832,7 +895,7 @@
             
             if (inputNominal === null || inputNominal.trim() === "") return;
             let nominal = Number(inputNominal.replace(/\D/g, ""));
-            if (nominal <= 0) return customAlert("Nominal tidak valid.", true);
+            if (nominal <= 0 || isNaN(nominal)) return customAlert("Nominal tidak valid.", true);
 
             if (wdCount === 0 && nominal < 1000000) return showCustomModal('alert', 'Pemberitahuan', "Minimal penarikan PERTAMA Anda adalah Rp 1.000.000. (Penarikan selanjutnya bebas).");
             else if (wdCount > 0 && nominal < 10000) return customAlert("Minimal penarikan adalah Rp 10.000.", true);
@@ -855,7 +918,6 @@
 
         window.logoutUser = async () => { await signOut(auth); window.location.href = "index.html"; };
 
-        // ================= CHART & BINANCE WEBSOCKET FIX =================
         let chart = null;
         let candleSeries = null;
         const chartContainer = document.getElementById('chartContainer');
@@ -863,7 +925,6 @@
 
         function initChart() {
             if (chart) return;
-            // Pastikan lebar dan tinggi diambil saat diinisialisasi
             chart = LightweightCharts.createChart(chartContainer, {
                 width: chartWrapper.clientWidth || 360, 
                 height: chartWrapper.clientHeight || 260,
@@ -875,7 +936,6 @@
             });
             candleSeries = chart.addCandlestickSeries({ upColor: '#00E575', downColor: '#FF3B30', borderDownColor: '#FF3B30', borderUpColor: '#00E575', wickDownColor: '#FF3B30', wickUpColor: '#00E575' });
             
-            // FIX: The ResizeObserver keeps the chart perfectly sized even if tabs switch!
             const resizeObserver = new ResizeObserver(entries => {
                 if (entries.length === 0 || entries[0].target !== chartWrapper) return;
                 const newRect = entries[0].contentRect;
